@@ -1,5 +1,6 @@
 package com.yanovych.logiskserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,12 +17,16 @@ public class Driver {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
-
-    @OneToMany(mappedBy = "driver")
-    private List<Order> orders;
+    private Integer driverRate;
+    private String licenseCode;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transport_id", referencedColumnName = "id")
     private Transport transport;
+
+    @OneToMany(mappedBy = "driver")
+    @JsonIgnore
+    private List<Order> orders;
 }

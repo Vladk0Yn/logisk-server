@@ -3,6 +3,7 @@ package com.yanovych.logiskserver.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
@@ -16,6 +17,7 @@ public class Order {
     private Double weight;
     private Double height;
     private Double width;
+    private BigDecimal deliveryPrice;
     @Enumerated(EnumType.STRING)
     private OrderType type;
     @Enumerated(EnumType.STRING)
@@ -28,7 +30,7 @@ public class Order {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_from_id", nullable = false)
-    private Location locationFrom;
+    public Location locationFrom;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_to_id", nullable = false)

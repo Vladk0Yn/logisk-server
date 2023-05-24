@@ -18,6 +18,7 @@ public class User {
     private String password;
     private String name;
     private BigDecimal balance;
+    private String phoneNumber;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
