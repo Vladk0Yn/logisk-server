@@ -16,7 +16,7 @@ public class Location {
     private Double latitude;
     private Double longitude;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
 }

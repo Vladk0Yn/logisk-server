@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ClientOrderService {
     ResponseOrderDto create(RequestOrderDto order);
-    List<ResponseOrderDto> getAll();
+    List<ResponseOrderDto> getAll(Long id);
     ResponseOrderDto get(Long id);
+    ResponseOrderDto update(RequestOrderDto order);
+    void delete(Long id);
 }

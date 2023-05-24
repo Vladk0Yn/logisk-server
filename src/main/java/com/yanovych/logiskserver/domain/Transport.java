@@ -19,6 +19,6 @@ public class Transport {
     private Double loadHeight;
     private Double loadWidth;
 
-    @OneToOne(mappedBy = "transport", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "transport", fetch = FetchType.LAZY)
     private Driver driver;
 }

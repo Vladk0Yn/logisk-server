@@ -22,11 +22,10 @@ public class Driver {
     private Integer driverRate;
     private String licenseCode;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transport_id", referencedColumnName = "id")
     private Transport transport;
 
     @OneToMany(mappedBy = "driver")
-    @JsonIgnore
     private List<Order> orders;
 }

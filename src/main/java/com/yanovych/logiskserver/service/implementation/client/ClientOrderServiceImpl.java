@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +35,8 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     }
 
     @Override
-    public List<ResponseOrderDto> getAll() {
-        List<Order> orders = orderRepository.findAll();
+    public List<ResponseOrderDto> getAll(Long id) {
+        List<Order> orders = orderRepository.findOrdersByClient_Id(id);
         return orders.stream()
                 .map(ResponseOrderDTOMapper.INSTANCE::orderToDto)
                 .collect(Collectors.toList());
@@ -45,5 +46,16 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     public ResponseOrderDto get(Long id) {
         Order order = orderRepository.findById(id).orElse(null);
         return ResponseOrderDTOMapper.INSTANCE.orderToDto(order);
+    }
+
+    @Override
+    public ResponseOrderDto update(RequestOrderDto order) {
+        Order updatedOrder = RequestOrderDTOMapper.INSTANCE.dtoToOrder(order);
+        return ResponseOrderDTOMapper.INSTANCE.orderToDto(orderRepository.save(updatedOrder));
+    }
+
+    @Override
+    public void delete(Long id) {
+        orderRepository.deleteById(id);
     }
 }
