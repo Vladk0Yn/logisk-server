@@ -63,27 +63,26 @@ public class AuthService {
         user.setEmail(requestRegisterDto.email());
         user.setName(requestRegisterDto.name());
         user.setBalance(BigDecimal.valueOf(0));
+        user.setPhoneNumber(requestRegisterDto.phoneNumber());
         user.setPassword(passwordEncoder.encode(requestRegisterDto.password()));
-        List<Role> roleList = new ArrayList<>();
         for (Role role : roleRepository.findAll()) {
             if (requestRegisterDto.role().toUpperCase().equals(role.getName())) {
                 if (role.getName().equals("DRIVER")) {
+                    user.setRole(role);
                     Driver driver = new Driver();
                     driver.setUser(user);
                     user.setDriver(driver);
                     driverRepository.save(driver);
-                    roleList.add(role);
                 }
                 if (role.getName().equals("CLIENT")) {
+                    user.setRole(role);
                     Client client = new Client();
                     client.setUser(user);
                     user.setClient(client);
                     clientRepository.save(client);
-                    roleList.add(role);
                 }
             }
         }
-        user.setRoles(roleList);
         return ResponseUserDTOMapper.INSTANCE.userToDto(userRepository.save(user));
     }
 }

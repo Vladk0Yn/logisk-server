@@ -14,6 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/client/orders")
 @Tag(name = "/client/orders", description = "Client orders endpoint")
 public class ClientOrderController {

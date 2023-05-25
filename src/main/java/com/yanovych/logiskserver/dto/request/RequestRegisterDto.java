@@ -4,6 +4,7 @@ public record RequestRegisterDto(
         String email,
         String name,
         String password,
+        String phoneNumber,
         String role
 ) {
 }

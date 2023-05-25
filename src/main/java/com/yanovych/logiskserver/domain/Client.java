@@ -18,15 +18,12 @@ public class Client {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
     private Integer clientRate;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Location> locations;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Order> orders;
 }

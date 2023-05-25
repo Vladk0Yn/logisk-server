@@ -17,7 +17,6 @@ public class Driver {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
     private Integer driverRate;
     private String licenseCode;

@@ -8,6 +8,7 @@ public record ResponseUserDto(
         String password,
         String name,
         BigDecimal balance,
-        String phoneNumber
+        String phoneNumber,
+        String role
 ) {
 }
