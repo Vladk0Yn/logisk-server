@@ -7,8 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ResponseOrderDTOMapper {
-    ResponseOrderDTOMapper INSTANCE = Mappers.getMapper(ResponseOrderDTOMapper.class);
+public interface ResponseOrderDtoMapper {
+    ResponseOrderDtoMapper INSTANCE = Mappers.getMapper(ResponseOrderDtoMapper.class);
 
     @Mapping(source = "locationTo.id", target = "locationToId")
     @Mapping(source = "locationFrom.id", target = "locationFromId")

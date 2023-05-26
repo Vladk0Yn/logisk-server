@@ -24,8 +24,7 @@ public class ClientOrderController {
     @PostMapping()
     @Operation(summary = "create new order from user")
     public ResponseEntity<ResponseOrderDto> createOrder(
-            @RequestBody
-            RequestOrderDto requestOrderDto) {
+            @RequestBody RequestOrderDto requestOrderDto) {
         ResponseOrderDto order = clientOrderService.create(requestOrderDto);
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
@@ -35,9 +34,9 @@ public class ClientOrderController {
 
     @GetMapping()
     @Operation(summary = "get all user orders")
-    public ResponseEntity<List<ResponseOrderDto>> getOrders(@RequestParam Long clientId) {
-        List<ResponseOrderDto> orders = clientOrderService.getAll(clientId);
-        if (orders.isEmpty()) {
+    public ResponseEntity<List<ResponseOrderDto>> getOrders() {
+        List<ResponseOrderDto> orders = clientOrderService.getAll();
+        if (orders == null || orders.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
@@ -47,7 +46,7 @@ public class ClientOrderController {
     @Operation(summary = "get user order by id")
     public ResponseEntity<ResponseOrderDto> getOrder(@PathVariable Long id) {
         ResponseOrderDto order = clientOrderService.get(id);
-        if (order == null) {
+        if (clientOrderService.get(id) == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(order, HttpStatus.OK);
@@ -56,14 +55,12 @@ public class ClientOrderController {
     @PutMapping("/put")
     @Operation(summary = "update order")
     public ResponseEntity<ResponseOrderDto> updateOrder(
-            @RequestBody
-            RequestOrderDto requestOrderDto
-            ) {
+            @RequestBody RequestOrderDto requestOrderDto) {
         ResponseOrderDto order = clientOrderService.update(requestOrderDto);
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        return new ResponseEntity<>(order, HttpStatus.OK) ;
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

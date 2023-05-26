@@ -7,11 +7,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface RequestOrderDTOMapper {
-    RequestOrderDTOMapper INSTANCE = Mappers.getMapper(RequestOrderDTOMapper.class);
+public interface RequestOrderDtoMapper {
+    RequestOrderDtoMapper INSTANCE = Mappers.getMapper(RequestOrderDtoMapper.class);
 
     @Mapping(source = "locationToId", target = "locationTo.id")
     @Mapping(source = "locationFromId", target = "locationFrom.id")
-    @Mapping(source = "clientId", target = "client.id")
     Order dtoToOrder(RequestOrderDto dto);
 }

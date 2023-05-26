@@ -7,8 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ResponseUserDTOMapper {
-    ResponseUserDTOMapper INSTANCE = Mappers.getMapper(ResponseUserDTOMapper.class);
+public interface ResponseUserDtoMapper {
+    ResponseUserDtoMapper INSTANCE = Mappers.getMapper(ResponseUserDtoMapper.class);
 
     @Mapping(source = "role.name", target = "role")
     ResponseUserDto userToDto(User user);

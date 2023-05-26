@@ -4,7 +4,7 @@ import com.yanovych.logiskserver.domain.Client;
 import com.yanovych.logiskserver.domain.Driver;
 import com.yanovych.logiskserver.domain.Role;
 import com.yanovych.logiskserver.domain.User;
-import com.yanovych.logiskserver.dto.mapper.ResponseUserDTOMapper;
+import com.yanovych.logiskserver.dto.mapper.ResponseUserDtoMapper;
 import com.yanovych.logiskserver.dto.request.RequestLoginDto;
 import com.yanovych.logiskserver.dto.request.RequestRegisterDto;
 import com.yanovych.logiskserver.dto.response.ResponseUserDto;
@@ -13,8 +13,6 @@ import com.yanovych.logiskserver.repository.DriverRepository;
 import com.yanovych.logiskserver.repository.RoleRepository;
 import com.yanovych.logiskserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,8 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -52,7 +48,7 @@ public class AuthService {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String loggedInUsername = userDetails.getUsername();
             User user = userRepository.findByEmail(loggedInUsername).orElse(null);
-            return ResponseUserDTOMapper.INSTANCE.userToDto(user);
+            return ResponseUserDtoMapper.INSTANCE.userToDto(user);
         } catch (AuthenticationException e) {
             return null;
         }
@@ -83,6 +79,6 @@ public class AuthService {
                 }
             }
         }
-        return ResponseUserDTOMapper.INSTANCE.userToDto(userRepository.save(user));
+        return ResponseUserDtoMapper.INSTANCE.userToDto(userRepository.save(user));
     }
 }

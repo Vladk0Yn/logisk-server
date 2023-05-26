@@ -18,8 +18,7 @@ public record RequestOrderDto(
         BigDecimal deliveryPrice,
         Timestamp deliverDueTime,
         Long locationToId,
-        Long locationFromId,
-        Long clientId
+        Long locationFromId
 ) {
 
 }
