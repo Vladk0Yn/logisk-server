@@ -10,6 +10,5 @@ import org.mapstruct.factory.Mappers;
 public interface ResponseLocationDtoMapper {
     ResponseLocationDtoMapper INSTANCE = Mappers.getMapper(ResponseLocationDtoMapper.class);
 
-    @Mapping(source = "client.id", target = "clientId")
     ResponseLocationDto locationToDto(Location location);
 }

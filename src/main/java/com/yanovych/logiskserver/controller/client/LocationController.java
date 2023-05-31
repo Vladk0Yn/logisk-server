@@ -13,7 +13,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/client/locations")
 @Tag(name = "/client/locations", description = "Client locations endpoint")
 public class LocationController {

@@ -63,7 +63,11 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public void delete(Long id) {
         List<Location> locations = getClientLocations();
-        if (locations.stream().anyMatch(location -> location.getId().equals(id))) {
+        Location clientLocation = locations.stream().filter(location -> Objects.equals(location.getId(), id)).findFirst().orElse(null);
+        if (clientLocation == null) {
+            return;
+        }
+        if (clientLocation.getOrdersFrom().isEmpty() && clientLocation.getOrdersTo().isEmpty()) {
             locationRepository.deleteById(id);
         }
     }

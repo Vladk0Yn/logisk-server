@@ -8,6 +8,6 @@ public record ResponseLocationDto(
         LocationType type,
         Double longitude,
         Double latitude,
-        Long clientId
+        String address
 ) {
 }

@@ -7,6 +7,7 @@ public record RequestLocationDto(
         String name,
         LocationType type,
         Double longitude,
-        Double latitude
+        Double latitude,
+        String address
 ) {
 }

@@ -1,6 +1,7 @@
 package com.yanovych.logiskserver.controller.client;
 
 import com.yanovych.logiskserver.dto.request.RequestOrderDto;
+import com.yanovych.logiskserver.dto.response.ResponseDriverDto;
 import com.yanovych.logiskserver.dto.response.ResponseOrderDto;
 import com.yanovych.logiskserver.service.client.ClientOrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,7 +15,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/client/orders")
 @Tag(name = "/client/orders", description = "Client orders endpoint")
 public class ClientOrderController {
@@ -71,5 +71,14 @@ public class ClientOrderController {
         }
         clientOrderService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/driver")
+    public ResponseEntity<ResponseDriverDto> getOrderDriver(@PathVariable Long id) {
+        ResponseDriverDto driver = clientOrderService.getDriver(id);
+        if (driver == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 }

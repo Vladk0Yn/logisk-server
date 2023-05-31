@@ -15,6 +15,7 @@ public class Transport {
     private String name;
     @Enumerated(EnumType.STRING)
     private TransportType type;
+    private String code;
     private Double loadCapacity;
     private Double loadHeight;
     private Double loadWidth;

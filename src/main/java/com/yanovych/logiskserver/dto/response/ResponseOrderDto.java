@@ -1,11 +1,8 @@
 package com.yanovych.logiskserver.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yanovych.logiskserver.domain.*;
-import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 public record ResponseOrderDto(
@@ -19,9 +16,10 @@ public record ResponseOrderDto(
         BigDecimal deliveryPrice,
         Timestamp createdTime,
         Timestamp deliverDueTime,
-        Long locationToId,
-        Long locationFromId,
-        Long clientId
+        ResponseLocationDto locationTo,
+        ResponseLocationDto locationFrom,
+        Long clientId,
+        Long driverId
 ) {
 
 }

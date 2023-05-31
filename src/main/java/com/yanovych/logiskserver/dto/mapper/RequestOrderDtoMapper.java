@@ -4,7 +4,10 @@ import com.yanovych.logiskserver.domain.Order;
 import com.yanovych.logiskserver.dto.request.RequestOrderDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+
+import java.sql.Timestamp;
 
 @Mapper
 public interface RequestOrderDtoMapper {
@@ -13,4 +16,5 @@ public interface RequestOrderDtoMapper {
     @Mapping(source = "locationToId", target = "locationTo.id")
     @Mapping(source = "locationFromId", target = "locationFrom.id")
     Order dtoToOrder(RequestOrderDto dto);
+
 }

@@ -14,7 +14,6 @@ public record RequestOrderDto(
         Double height,
         Double width,
         OrderType type,
-        OrderStatus status,
         BigDecimal deliveryPrice,
         Timestamp deliverDueTime,
         Long locationToId,
