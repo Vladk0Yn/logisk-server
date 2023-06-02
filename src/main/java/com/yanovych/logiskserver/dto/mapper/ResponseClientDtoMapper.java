@@ -13,6 +13,5 @@ public interface ResponseClientDtoMapper {
     @Mapping(source = "client.user.name", target = "name")
     @Mapping(source = "client.user.email", target = "email")
     @Mapping(source = "client.user.phoneNumber", target = "phoneNumber")
-    @Mapping(source = "client.user.balance", target = "balance")
     ResponseClientDto clientToDto(Client client);
 }

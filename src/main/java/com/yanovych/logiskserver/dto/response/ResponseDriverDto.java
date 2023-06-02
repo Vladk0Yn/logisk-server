@@ -6,9 +6,7 @@ public record ResponseDriverDto (
         Long id,
         String name,
         String email,
-        String licenseCode,
         String phoneNumber,
-        BigDecimal balance,
         ResponseTransportDto transport
 ) {
 }

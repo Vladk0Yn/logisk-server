@@ -20,7 +20,6 @@ public class Client {
     @MapsId
     @JoinColumn(name = "user_id")
     private User user;
-    private Integer clientRate;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Location> locations = new ArrayList<>();

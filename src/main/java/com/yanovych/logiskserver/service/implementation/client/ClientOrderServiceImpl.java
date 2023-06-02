@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClientOrderServiceImpl implements ClientOrderService {
 
-    private final SessionUserService sessionUserService;
     private final OrderRepository orderRepository;
+    private final SessionUserService sessionUserService;
 
     private List<Order> getClientOrders() {
         return orderRepository.findOrdersByClient_IdOrderByCreatedTimeDesc(sessionUserService.getAuthenticatedUser().getId());
@@ -99,7 +99,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
 
         Client authenticatedClient = sessionUserService.getAuthenticatedUser().getClient();
 
-        if (oldOrder.getStatus() != OrderStatus.CREATED) {
+        if (oldOrder.getStatus() != OrderStatus.CREATED && oldOrder.getStatus() != OrderStatus.CANCELED) {
             return null;
         }
 

@@ -19,8 +19,6 @@ public class Driver {
     @MapsId
     @JoinColumn(name = "user_id")
     private User user;
-    private Integer driverRate;
-    private String licenseCode;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transport_id", referencedColumnName = "id")

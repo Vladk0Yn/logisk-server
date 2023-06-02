@@ -46,7 +46,7 @@ public class LocationController {
         return new ResponseEntity<>(location, HttpStatus.OK);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<ResponseLocationDto> updateLocation(
             @RequestBody RequestLocationDto requestLocationDto) {
         ResponseLocationDto location = locationService.update(requestLocationDto);
@@ -56,7 +56,7 @@ public class LocationController {
         return new ResponseEntity<>(location, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteLocation(@PathVariable Long id) {
         if (locationService.get(id) == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);

@@ -22,7 +22,6 @@ public class Order {
     private OrderType type;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-
     private Timestamp createdTime;
     private Timestamp deliverDueTime;
     private Timestamp acceptTime;

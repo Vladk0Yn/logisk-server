@@ -52,7 +52,7 @@ public class ClientOrderController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     @Operation(summary = "update order")
     public ResponseEntity<ResponseOrderDto> updateOrder(
             @RequestBody RequestOrderDto requestOrderDto) {
@@ -63,7 +63,7 @@ public class ClientOrderController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "delete order by id")
     public ResponseEntity<?> deleteOrder(@PathVariable Long id) {
         if (clientOrderService.get(id) == null) {

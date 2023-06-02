@@ -13,6 +13,5 @@ public interface ResponseDriverDtoMapper {
     @Mapping(source = "driver.user.name", target = "name")
     @Mapping(source = "driver.user.email", target = "email")
     @Mapping(source = "driver.user.phoneNumber", target = "phoneNumber")
-    @Mapping(source = "driver.user.balance", target = "balance")
     ResponseDriverDto driverToDto(Driver driver);
 }
