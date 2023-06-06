@@ -12,6 +12,5 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findOrdersByClient_IdOrderByCreatedTimeDesc(Long id);
     List<Order> findOrdersByDriver_IdOrderByDeliverDueTimeDesc(Long id);
-
-    List<Order> findOrdersByStatusAndWidthLessThanAndWeightLessThanAndHeightLessThanOrderByCreatedTimeDesc(OrderStatus orderStatus, Double width, Double weight, Double height);
+    List<Order> findOrdersByStatusOrderByCreatedTimeDesc(OrderStatus orderStatus);
 }

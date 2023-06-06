@@ -13,4 +13,5 @@ public interface DriverOrderService {
     ResponseOrderDto take(Long id);
     ResponseOrderDto updateOrderStatus(Long id, String status);
     ResponseClientDto getClient(Long id);
+    void removeDriver(Long id);
 }

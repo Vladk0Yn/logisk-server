@@ -9,6 +9,7 @@ public record ResponseTransportDto (
         String code,
         Double loadCapacity,
         Double loadHeight,
+        Double loadLength,
         Double loadWidth
 ) {
 }

@@ -19,6 +19,7 @@ public class Transport {
     private Double loadCapacity;
     private Double loadHeight;
     private Double loadWidth;
+    private Double loadLength;
 
     @OneToOne(mappedBy = "transport", fetch = FetchType.LAZY)
     private Driver driver;

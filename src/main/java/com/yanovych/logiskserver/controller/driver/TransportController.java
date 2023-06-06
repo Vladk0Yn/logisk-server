@@ -4,6 +4,7 @@ import com.yanovych.logiskserver.dto.request.RequestTransportDto;
 import com.yanovych.logiskserver.dto.response.ResponseDriverDto;
 import com.yanovych.logiskserver.dto.response.ResponseTransportDto;
 import com.yanovych.logiskserver.service.driver.TransportService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class TransportController {
     private final TransportService transportService;
 
     @PostMapping("")
+    @Operation(summary = "create driver transport")
     public ResponseEntity<ResponseTransportDto> createDriverTransport(@RequestBody RequestTransportDto requestTransportDto) {
         ResponseTransportDto transport = transportService.create(requestTransportDto);
         if (transport == null) {
@@ -29,6 +31,7 @@ public class TransportController {
     }
 
     @GetMapping("")
+    @Operation(summary = "get driver transport")
     public ResponseEntity<ResponseTransportDto> getTransport() {
         ResponseTransportDto transport = transportService.get();
         if (transport == null) {
@@ -38,6 +41,7 @@ public class TransportController {
     }
 
     @PutMapping("")
+    @Operation(summary = "update driver transport")
     public ResponseEntity<ResponseTransportDto> updateTransport(@RequestBody RequestTransportDto requestTransportDto) {
         ResponseTransportDto transport = transportService.update(requestTransportDto);
         if (transport == null) {

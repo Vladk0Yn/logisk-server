@@ -10,6 +10,7 @@ public record ResponseOrderDto(
         String name,
         Double weight,
         Double height,
+        Double length,
         Double width,
         OrderType type,
         OrderStatus status,

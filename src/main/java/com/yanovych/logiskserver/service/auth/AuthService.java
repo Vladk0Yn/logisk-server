@@ -62,15 +62,15 @@ public class AuthService {
         user.setPhoneNumber(requestRegisterDto.phoneNumber());
         user.setPassword(passwordEncoder.encode(requestRegisterDto.password()));
         for (Role role : roleRepository.findAll()) {
-            if (requestRegisterDto.role().toUpperCase().equals(role.getName())) {
-                if (role.getName().equals("DRIVER")) {
+            if (requestRegisterDto.role().toUpperCase().equals(role.getName().toUpperCase())) {
+                if (role.getName().equalsIgnoreCase("DRIVER")) {
                     user.setRole(role);
                     Driver driver = new Driver();
                     driver.setUser(user);
                     user.setDriver(driver);
                     driverRepository.save(driver);
                 }
-                if (role.getName().equals("CLIENT")) {
+                if (role.getName().equalsIgnoreCase("CLIENT")) {
                     user.setRole(role);
                     Client client = new Client();
                     client.setUser(user);

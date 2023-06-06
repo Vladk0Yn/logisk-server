@@ -27,6 +27,9 @@ public class TransportServiceImpl implements TransportService {
     @Override
     public ResponseTransportDto create(RequestTransportDto requestTransportDto) {
         Transport transport = RequestTransportDtoMapper.INSTANCE.dtoToTransport(requestTransportDto);
+        if (transport.getLoadLength() == null || transport.getLoadWidth() == null || transport.getLoadHeight() == null || transport.getLoadCapacity() == null) {
+            return null;
+        }
         Driver driver = sessionUserService.getAuthenticatedUser().getDriver();
         transport = transportRepository.save(transport);
         driver.setTransport(transport);

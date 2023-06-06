@@ -17,6 +17,7 @@ public class Order {
     private Double weight;
     private Double height;
     private Double width;
+    private Double length;
     private BigDecimal deliveryPrice;
     @Enumerated(EnumType.STRING)
     private OrderType type;

@@ -11,6 +11,7 @@ public record RequestTransportDto(
         String code,
         Double loadCapacity,
         Double loadHeight,
+        Double loadLength,
         Double loadWidth
 ) {
 }

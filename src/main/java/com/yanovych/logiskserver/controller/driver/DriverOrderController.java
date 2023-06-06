@@ -72,11 +72,19 @@ public class DriverOrderController {
     }
 
     @PutMapping("{id}/status")
+    @Operation(summary = "edit order status")
     public ResponseEntity<ResponseOrderDto> setOrderStatus(@PathVariable Long id, @RequestParam("status") String status) {
         ResponseOrderDto order = this.driverOrderService.updateOrderStatus(id, status);
         if (order == null) {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}/remove")
+    @Operation(summary = "remove driver from order")
+    public ResponseEntity<?> removeDriverFromOrder(@PathVariable Long id) {
+        this.driverOrderService.removeDriver(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

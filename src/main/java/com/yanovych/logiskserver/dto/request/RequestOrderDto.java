@@ -13,6 +13,7 @@ public record RequestOrderDto(
         Double weight,
         Double height,
         Double width,
+        Double length,
         OrderType type,
         BigDecimal deliveryPrice,
         Timestamp deliverDueTime,

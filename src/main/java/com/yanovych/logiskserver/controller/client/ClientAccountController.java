@@ -24,7 +24,7 @@ public class ClientAccountController {
         return new ResponseEntity<>(balance, HttpStatus.OK);
     }
 
-    @PutMapping("/balance")
+    @PutMapping("/balance/up")
     public ResponseEntity<BigDecimal> topUpClientBalance(@RequestParam BigDecimal amount) {
         BigDecimal balance = this.clientAccountService.topUpBalance(amount);
         if (balance == null) {

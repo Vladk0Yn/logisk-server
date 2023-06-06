@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -35,13 +37,44 @@ public class DriverOrderServiceImpl implements DriverOrderService {
         if (driver == null) {
             return null;
         }
-        Transport transport = driver.getTransport();
-        if (transport == null) {
+        Transport driverTransport = driver.getTransport();
+        if (driverTransport == null) {
             return null;
         }
-        return this.orderRepository
-                .findOrdersByStatusAndWidthLessThanAndWeightLessThanAndHeightLessThanOrderByCreatedTimeDesc
-                        (OrderStatus.CREATED, transport.getLoadWidth(), transport.getLoadCapacity(), transport.getLoadHeight());
+
+        double[] driverTransportParams = new double[3];
+
+        driverTransportParams[0] = driverTransport.getLoadLength();
+        driverTransportParams[1] = driverTransport.getLoadHeight();
+        driverTransportParams[2] = driverTransport.getLoadWidth();
+
+        Arrays.sort(driverTransportParams);
+
+        List<Order> allCreatedOrders = this.orderRepository
+                .findOrdersByStatusOrderByCreatedTimeDesc((OrderStatus.CREATED));
+
+        if (allCreatedOrders == null || allCreatedOrders.isEmpty()) {
+            return null;
+        }
+
+        List<Order> availableOrders = new ArrayList<>();
+        for (Order order : allCreatedOrders) {
+            double[] orderParams = new double[3];
+            orderParams[0] = order.getLength();
+            orderParams[1] = order.getHeight();
+            orderParams[2] = order.getWidth();
+            Arrays.sort(orderParams);
+            if (orderParams[0] <= driverTransportParams[0]
+                    && orderParams[1] <= driverTransportParams[1]
+                    && orderParams[2] <= driverTransportParams[2]
+                    && order.getWeight() <= driver.getTransport().getLoadCapacity()) {
+                availableOrders.add(order);
+            }
+        }
+        if (availableOrders.isEmpty()) {
+            return null;
+        }
+        return availableOrders;
     }
 
     private List<Order> getDriverOrders() {
@@ -59,7 +92,7 @@ public class DriverOrderServiceImpl implements DriverOrderService {
     @Override
     public List<ResponseOrderDto> getAvailable() {
         List<Order> availableOrders = getAvailableOrders();
-        if (availableOrders == null || availableOrders.isEmpty()) {
+        if (availableOrders == null) {
             return null;
         }
         return availableOrders.stream()
@@ -133,5 +166,14 @@ public class DriverOrderServiceImpl implements DriverOrderService {
     public ResponseClientDto getClient(Long id) {
         Order order = this.orderRepository.getReferenceById(id);
         return ResponseClientDtoMapper.INSTANCE.clientToDto(order.getClient());
+    }
+
+    @Override
+    public void removeDriver(Long id) {
+        Order order = this.orderRepository.getReferenceById(id);
+        if (Objects.equals(order.getStatus().toString(), "FINISHED")) {
+            order.setDriver(null);
+            this.orderRepository.save(order);
+        }
     }
 }
